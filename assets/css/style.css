@@ -1,0 +1,128 @@
+/*!
+Version: 3.0.0
+Author: Ankit Hingarajiya - DeskApp
+*/
+@charset "utf-8";
+
+.pd-0 {
+    padding: 0;
+}
+.padding-top-10 {
+    padding-top: 10px;
+}
+.padding-top-30 {
+    padding-top: 30px;
+}
+.padding-bottom-30 {
+    padding-bottom: 30px;
+}
+
+.pd-20 {
+    padding: 20px;
+}
+.chat-box .chat-desc ul,
+.pd-ltr-20 {
+    padding: 20px 20px 0;
+}
+
+
+.margin-5 {
+    margin: 5px;
+}
+.mt-15 {
+    margin-top: 15px;
+}
+.mt-30 {
+    margin-top: 30px;
+}
+.device-manage-progress-chart ul li,
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+.mb-15 {
+    margin-bottom: 15px;
+}
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+
+.card-box,
+.da-card {
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.08);
+}
+.card-img-top {
+    border-radius: 10px 10px 0 0;
+}
+.card-img-bottom {
+    border-radius: 0 0 10px 10px;
+}
+.card-img {
+    border-radius: 10px;
+}
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+.card-header {
+    font-weight: 500;
+    font-size: 16px;
+}
+.card-text,
+.price del {
+    font-size: 15px;
+}
+
+@media (min-width: 1301px) and (max-width: 1400px) {
+
+    .main-container {
+        padding-left: 270px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .main-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+@media (min-width: 1025px) {
+    .header-left .header-search {
+        display: block !important;
+    }
+}
+@media (max-width: 1024px) {
+    .main-container {
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .header {
+        position: fixed;
+        left: 0;
+        top: 0;
+        -webkit-box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    }
+    .main-container {
+        padding-top: 1000px;
+        
+    }
+    
+    .main-container,
+    .timeline ul li {
+        padding-bottom: 0;
+    }
+    
+}
+
+.main-container {
+    padding: 80px;
+    display: block;
+    justify-content: center;
+}
