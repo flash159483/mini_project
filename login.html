@@ -34,7 +34,7 @@
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
-    import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRedirectResult } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 
 
     const firebaseConfig = {
@@ -82,7 +82,7 @@
                 // name = displayname
                 // email = email
                 // photo = photoURL
-                alert(user.displayname)
+                alert(user.uid);
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code;
@@ -92,6 +92,7 @@
                 // The AuthCredential type that was used.
                 const credential = GoogleAuthProvider.credentialFromError(error);
                 // ...
+                alert(errorCode);
             });
     })
 </script>
