@@ -348,7 +348,7 @@ var utils = {
 
 var detectorInit = function detectorInit() {
   var _window = window,
-      is = _window.is;
+    is = _window.is;
   var html = document.querySelector('html');
   is.opera() && addClass(html, 'opera');
   is.mobile() && addClass(html, 'mobile');
@@ -489,7 +489,7 @@ var navbarInit = function navbarInit() {
     var colorRgb = utils.hexToRgb(color);
 
     var _window$getComputedSt = window.getComputedStyle(navbar),
-        backgroundImage = _window$getComputedSt.backgroundImage;
+      backgroundImage = _window$getComputedSt.backgroundImage;
 
     var transition = 'background-color 0.35s ease';
     navbar.style.backgroundImage = 'none'; // Change navbar background color on scroll
@@ -850,6 +850,24 @@ var zanimationInit = function zanimationInit() {
     return triggerZanimation();
   });
 };
+
+window.onload = function () {
+  // Show or hide the button on scroll
+  window.onscroll = function () {
+    if (document.documentElement.scrollTop > 100) {
+      document.getElementById('topBtn').style.display = 'block';
+    } else {
+      document.getElementById('topBtn').style.display = 'none';
+    }
+  };
+
+  // Scroll to top when the button is clicked
+  document.getElementById('topBtn').onclick = function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  };
+};
+
 /* -------------------------------------------------------------------------- */
 
 /*                            Theme Initialization                            */

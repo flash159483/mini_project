@@ -29,9 +29,7 @@
 
 <body>
 
-  <!-- ===============================================-->
-  <!--    Main Content-->
-  <!-- ===============================================-->
+  <!-- main section -->
   <main class="main" id="top">
     <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" data-navbar-on-scroll="light">
       <div class="container"><a class="navbar-brand" href="index.html"><img src="assets/img/icons/Logo.png" height="35"
@@ -43,13 +41,12 @@
           <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base align-items-center">
             <li class="nav-item"><a class="nav-link px-3" href="#product">Product</a></li>
             <li class="nav-item"><a class="nav-link px-3" href="#customers">Customers</a></li>
-            <li class="nav-item"><a class="nav-link px-3" href="#pricing">Pricing</a></li>
             <li class="nav-item"><a class="nav-link pl-3 me-3" href="#docs">Docs </a></li>
             <!-- <a href="login.html"> -->
               <button id = "signUpBtn" class="btn btn-primary">Sign Up</button>
             <!-- </a> -->
           </ul>
-          
+
         </div>
       </div>
     </nav>
@@ -72,16 +69,15 @@
             <p class="fs-1" data-zanim-xs='{"delay":0.5}' data-zanim-trigger="scroll">공식 사이트에 있는 불편한 내역들을 보기 편한 타임 테이블
               형식으로 관리해보세요!</p>
             <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-md-start mt-5"
-              data-zanim-xs='{"delay":0.5}' data-zanim-trigger="scroll"><a class="btn btn-md btn-primary me-1" href="#!"
-                role="button">시작해보세요</a><a class="btn btn-md" href="#" role="button">질문있으면 40팀한테 물어보세요!<i
-                  class="fas fa-arrow-right ms-2"></i></a></div>
+              data-zanim-xs='{"delay":0.5}' data-zanim-trigger="scroll"><a class="btn btn-md btn-primary me-1"
+                href="login.html" role="button">시작해보세요</a><a class="btn btn-md" href="#" role="button">질문있으면 40팀한테
+                물어보세요!<i class="fas fa-arrow-right ms-2"></i></a></div>
           </div>
         </div>
       </div>
     </section>
 
 
-    <!-- ============================================-->
     <!-- <section> begin ============================-->
     <section id="product">
 
@@ -119,13 +115,7 @@
       <!-- end of .container-->
 
     </section>
-    <!-- <section> close ============================-->
-    <!-- ============================================-->
 
-
-
-
-    <!-- ============================================-->
     <!-- <section> begin ============================-->
     <section id="customers" style="background-color: #fbfafc;">
 
@@ -159,15 +149,9 @@
       <!-- end of .container-->
 
     </section>
-    <!-- <section> close ============================-->
-    <!-- ============================================-->
 
-
-
-
-    <!-- ============================================-->
-    <!-- <section> begin ============================-->
-    <section id="pricing">
+    <!-- pricing section  ============================-->
+    <section id="docs">
 
       <div class="container">
         <div class="row flex-center">
@@ -188,17 +172,6 @@
       </div>
       <!-- end of .container-->
 
-    </section>
-    <!-- <section> close ============================-->
-    <!-- ============================================-->
-
-
-
-
-    <!-- ============================================-->
-    <!-- <section> begin ============================-->
-    <section>
-
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-6 mb-4"><img class="w-100" src="assets/img/illustration/6.png" alt="..." /></div>
@@ -218,22 +191,18 @@
       <!-- end of .container-->
 
     </section>
-    <!-- <section> close ============================-->
-    <!-- ============================================-->
 
 
-
-
-
-    <!-- ============================================-->
-    <!-- <section> begin ============================-->
+    <!-- cta section ============================-->
     <section class="bg-200" id="cta">
 
       <div class="container">
         <div class="row align-items-center text-center">
           <div class="col-lg-12">
             <h2 class="fw-bold text-black">시작할 준비가 되셨나요?</h2>
-            <p>구글 계정으로 빠르게 시작해보세요</p>
+            <a href="login.html">
+              <p class="mt-4">구글 계정으로 빠르게 시작해보세요</p>
+            </a>
           </div>
 
         </div>
@@ -241,10 +210,9 @@
       <!-- end of .container-->
 
     </section>
-    <!-- <section> close ============================-->
-    <!-- ============================================-->
 
 
+    <!-- footer section -->
     <section class="py-0 bg-1000">
       <div class="container">
         <div class="row py-7">
@@ -260,7 +228,10 @@
   </main>
 
 
-
+  <button id="topBtn" class="btn btn-outline-secondary btn-sm border-0" role="button" title="Go to top"
+    style="background-color: transparent;">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
 
   <!--    JavaScripts-->
@@ -279,3 +250,8 @@
 </body>
 
 </html>
+
+<script>
+
+
+</script>
