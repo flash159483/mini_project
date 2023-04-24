@@ -11,6 +11,7 @@ jQuery(document).ready(function(){
 	});
 });
 
+
 (function () {
 	'use strict';
 	// ------------------------------------------------------- //
@@ -33,12 +34,14 @@ jQuery(document).ready(function(){
 			},
 			events: [
 			{
-				title: 'Barber',
-				description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.',
-				start: '2023-04-23',
-				end: '2023-04-25',
+				title: '[자유 멘토링] ★(팀원 구성 후) 프로젝트 주제 검토 및 선정/평가 방법',
+				name : '한철규',
+				description: '온라인',
+				start: '2023-04-25 10:00',
+				end: '2023-04-25 14:00',
 				className: 'fc-bg-default',
-				icon : "circle"
+				icon : "circle",
+				color : getRandomColor(),
 			},
 			],
 			dayClick: function() {
@@ -47,7 +50,7 @@ jQuery(document).ready(function(){
 			eventClick: function(event, jsEvent, view) {
 				jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
 				jQuery('.event-title').html(event.title);
-				jQuery('.event-body').html(event.description);
+				jQuery('.event-body').html(`멘토 : ${event.name} <br>강의실 : ${event.description} `);
 				jQuery('.eventUrl').attr('href',event.url);
 				jQuery('#modal-view-event').modal();
 			},
@@ -55,3 +58,7 @@ jQuery(document).ready(function(){
 });
 
 })(jQuery);
+
+function getRandomColor() {
+	return "#" + Math.floor(Math.random() * 16777215).toString(16);
+};
