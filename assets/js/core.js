@@ -442,12 +442,18 @@ function calendar (key, mom, now) {
 }
 
 var defaultLongDateFormat = {
-    LTS  : 'h:mm:ss A',
-    LT   : 'h:mm A',
-    L    : 'MM/DD/YYYY',
-    LL   : 'MMMM D, YYYY',
-    LLL  : 'MMMM D, YYYY h:mm A',
-    LLLL : 'dddd, MMMM D, YYYY h:mm A'
+    // LTS  : 'h:mm:ss A',
+    LTS  : 'A h:mm:ss',
+    // LT   : 'h:mm A',
+    LT   : 'A h:mm',
+    // L    : 'MM/DD/YYYY',
+    L    : 'YYYY/MM/DD',
+    // LL   : 'MMMM D, YYYY',
+    LL   : 'YYYY MMMM/D',
+    // LLL  : 'MMMM D, YYYY h:mm A',
+    LLL  : 'YYYY MMMM D, h:mm A',
+    // LLLL : 'dddd, MMMM D, YYYY h:mm A',
+    LLLL : 'YYYY MMMM D, dddd, h:mm A',
 };
 
 function longDateFormat (key) {
@@ -942,7 +948,7 @@ addParseToken(['MMM', 'MMMM'], function (input, array, config, token) {
 // LOCALES
 
 var MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/;
-var defaultLocaleMonths = 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_');
+var defaultLocaleMonths = '01_02_03_04_05_06_07_08_09_10_11_12'.split('_');
 function localeMonths (m, format) {
     if (!m) {
         return isArray(this._months) ? this._months :
@@ -952,7 +958,7 @@ function localeMonths (m, format) {
         this._months[(this._months.isFormat || MONTHS_IN_FORMAT).test(format) ? 'format' : 'standalone'][m.month()];
 }
 
-var defaultLocaleMonthsShort = 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_');
+var defaultLocaleMonthsShort = '01_02_03_04_05_06_07_08_09_10_11_12'.split('_');
 function localeMonthsShort (m, format) {
     if (!m) {
         return isArray(this._monthsShort) ? this._monthsShort :
@@ -3316,7 +3322,8 @@ hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
 hooks.defaultFormatUtc = 'YYYY-MM-DDTHH:mm:ss[Z]';
 
 function toString () {
-    return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+    // return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
+    return this.clone().locale('en').format('YYYY MMM DD ddd HH:mm:ss [GMT]ZZ');
 }
 
 function toISOString(keepOffset) {
@@ -18469,7 +18476,7 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
             monthsShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
             today: 'Сегодня',
             clear: 'Очистить',
-            dateFormat: 'dd.mm.yyyy',
+            dateFormat: 'yyyy.mm.dd',
             timeFormat: 'hh:ii',
             firstDay: 1
         }
@@ -19231,7 +19238,7 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
     monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     today: 'Today',
     clear: 'Clear',
-    dateFormat: 'mm/dd/yyyy',
+    dateFormat: 'yyyy/mm/dd',
     timeFormat: 'hh:ii aa',
     firstDay: 0
 }; })(jQuery);
