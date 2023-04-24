@@ -44,16 +44,17 @@ jQuery(document).ready(function(){
 				color : getRandomColor(),
 			},
 			],
+			locale : 'ko',
 			dayClick: function() {
 				jQuery('#modal-view-event-add').modal();
 			},
 			eventClick: function(event, jsEvent, view) {
 				jQuery('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
 				jQuery('.event-title').html(event.title);
-				jQuery('.event-body').html(`멘토 : ${event.name} <br>강의실 : ${event.description} `);
+				jQuery('.event-body').html(`멘토 : ${event.name} <br>강의실 : ${event.description}<br> ${event.start._i.substr(10)} ~ ${event.end._i.substr(10)} `);
 				jQuery('.eventUrl').attr('href',event.url);
 				jQuery('#modal-view-event').modal();
-			},
+			}
 		})
 });
 

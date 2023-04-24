@@ -17,6 +17,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRe
     const provider = new GoogleAuthProvider(app);
     const auth = getAuth(app);
 
+    // login.html
     if(document.getElementById('googleBtn') ){
         document.getElementById('googleBtn').onclick = function () {
 		signInWithPopup(auth, provider)
@@ -51,6 +52,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRe
         };
     }
 
+    // time.html
     if(document.getElementById('logOutBtn')) {
         document.getElementById('logOutBtn').onclick = function () {
 			
@@ -61,6 +63,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRe
 			location.replace(link);
 		};
     }
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             // User is signed in, see docs for a list of available properties
@@ -70,15 +73,18 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRe
             // document.getElementsByClassName("btn btn-primary")[0].innerHTML="Log Out";
             if(document.getElementById("signUpBtn"))
                 document.getElementById("signUpBtn").innerHTML="Log Out";
-            
             // ...
         } else {
             // User is signed out
             // ...
+            if(document.getElementById('logOutBtn')) {
+                const link = "index.html";
+                location.replace(link);
+            }
         }
     });
 
-    
+    // index.html
     if(document.getElementById('signUpBtn')) {
         signUpBtn.addEventListener("click", function () {
             if(this.innerHTML == "Sign Up") {
