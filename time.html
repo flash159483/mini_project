@@ -111,22 +111,22 @@
 										<h4 class="text-blue h4 mb-10">강의를 추가해주세요</h4>
 										<div class="form-group">
 											<label>강의 이름</label>
-											<input type="text" class="form-control" name="ename">
+											<input type="text" class="form-control" name="title">
 										</div>
 										<div class="form-group">
 											<label>강의 장소</label>
-											<input type='text' class="datetimepicker form-control" name="edate">
+											<input type='text' class="datetimepicker form-control" name="description">
 										</div>
 										<div class="form-group">
 											<label>멘토 성함</label>
-											<textarea class="form-control" name="edesc"></textarea>
+											<textarea class="form-control" name="name"></textarea>
 										</div>
 										<div class="form-group">
-											<label>날짜및 시간</label>
-											<input type="date" id="start" name="trip-start" value="2023-04-01"
+											<label>날짜 및 시간</label>
+											<input type="date" id="start" name="date" value="2023-04-01"
 												min="2023-04-01" max="2023-12-31">
-											<input type="time" id="appt" name="appt" min="06:00" max="24:00" required>
-											<input type="time" id="appt" name="appt" min="06:00" max="24:00" required>
+											<input type="time" id="appt" name="start-hour" step="300" required>
+											<input type="time" id="appt" name="end-hour" step="300" required>
 										</div>
 
 									</div>
@@ -144,13 +144,31 @@
 		</div>
 	</div>
 
+	<div class="main-container card-box pt-3">
+		<h1>연수생분들 리뷰</h1>
+		<div class="form-outline mb-4">
+			<input type="search" class="form-control" id="datatable-search-input" placeholder="멘토님 성함">
+			<label class="form-label" for="datatable-search-input">Search</label>
+		</div>
+			<table class="table" id="datatable">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">First</th>
+						<th scope="col">Last</th>
+						<th scope="col">Handle</th>
+					</tr>
+				</thead>
+			</table>
+	</div>
+
 
 	<!-- js -->
 	<script src="assets/js/core.js"></script>
 	<script src="assets/js/layout-settings.js"></script>
 	<script src="vendors/fullcalendar/fullcalendar.min.js"></script>
-	<script src="assets/js/calendar-setting.js"></script>
-
+	<script type="module" src="assets/js/calendar-setting.js"></script>
+	<script src="assets/js/search_bar.js"></script>
 	<script type="module" src="assets/js/login.js">	</script>
 </body>
 
