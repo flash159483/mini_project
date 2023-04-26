@@ -112,7 +112,7 @@ function getRandomColor() {
 
 function drawTable(data) {
 	var table = document.getElementById("datatable");
-	
+
 	for (var i = 0; i < data.length; i++) {
 		var row = table.insertRow();
 		var no = row.insertCell(0);
@@ -124,8 +124,10 @@ function drawTable(data) {
 		cnt.innerHTML = data[i]['reviewCount'];
 		row.addEventListener("click", function () {
 			var clickedName = this.cells[1].innerHTML;
-			alert(clickedName);
 			// 클릭한 이름에 맞는 review.html로 이동
+			localStorage.setItem('name', clickedName);
+			const link = "review.html";
+			location.replace(link);
 		})
 	}
 
