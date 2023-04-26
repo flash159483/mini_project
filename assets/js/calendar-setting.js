@@ -2,13 +2,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebas
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAiVOFKSUCQUBCe2ynqrcDdiP5rz2ULEjc",
-    authDomain: "chatapp-d20dc.firebaseapp.com",
-    projectId: "chatapp-d20dc",
-    storageBucket: "chatapp-d20dc.appspot.com",
-    messagingSenderId: "406808996835",
-    appId: "1:406808996835:web:7968975ad6aa1764e68ed6",
-    measurementId: "G-E56TL9L001"
+	apiKey: "AIzaSyAiVOFKSUCQUBCe2ynqrcDdiP5rz2ULEjc",
+	authDomain: "chatapp-d20dc.firebaseapp.com",
+	projectId: "chatapp-d20dc",
+	storageBucket: "chatapp-d20dc.appspot.com",
+	messagingSenderId: "406808996835",
+	appId: "1:406808996835:web:7968975ad6aa1764e68ed6",
+	measurementId: "G-E56TL9L001"
 };
 
 // Initialize Firebase
@@ -19,20 +19,22 @@ let uid;
 
 onAuthStateChanged(auth, (user) => {
 	if (user) {
-			// User is signed in, see docs for a list of available properties
-			// https://firebase.google.com/docs/reference/js/firebase.User
-			uid = user.uid;
-			
-			// alert(uid);
-			// document.getElementsByClassName("btn btn-primary")[0].innerHTML="Log Out";
-			
-			// ...
+		// User is signed in, see docs for a list of available properties
+		// https://firebase.google.com/docs/reference/js/firebase.User
+		uid = user.uid;
+
+		// alert(uid);
+		// document.getElementsByClassName("btn btn-primary")[0].innerHTML="Log Out";
+
+		// ...
 	} else {
-			// User is signed out
-			// ...
-			
+		// User is signed out
+		// ...
+
 	}
 });
+
+const tmp = [{ name: "AB", reviewCount: "200" }, { name: "CD", reviewCount: "120" }, { name: "EG", reviewCount: "500" }];
 
 jQuery(document).ready(function () {
 	jQuery("#add-event").submit(function () {
@@ -47,6 +49,8 @@ jQuery(document).ready(function () {
 		// DB로 저장
 		alert("Submitted");
 	});
+	drawTable(tmp);
+
 });
 
 
@@ -104,3 +108,44 @@ jQuery(document).ready(function () {
 function getRandomColor() {
 	return "#" + Math.floor(Math.random() * 16777215).toString(16);
 };
+
+function drawTable(data) {
+	var table = document.getElementById("datatable");
+
+	for (var i = 1; i < data.length; i++) {
+		var row = table.insertRow();
+		var no = row.insertCell(0);
+		var name = row.insertCell(1);
+		var cnt = row.insertCell(2);
+
+		no.innerHTML = i;
+		name.innerHTML = data[i]['name'];
+		cnt.innerHTML = data[i]['reviewCount'];
+		row.setAttribute("data-name", data[i]['name']);
+		row.addEventListener("click", function () {
+			var clickedName = this.cells[1].innerHTML;
+			alert(clickedName);
+		})
+	}
+
+}
+
+function searchTable() {
+	var input = document.getElementById("searchInput").value;
+	var table = document.getElementById("datatable");
+
+
+	for (var i = 0; i < table.rows.length; i++) {
+		var row = table.rows[i];
+
+		var name = row.cells[1].innerHTML.toLowerCase();
+		if (name.includes(input)) {
+			row.style.display = "";
+		} else {
+			row.style.display = "none";
+		}
+	}
+}
+
+
+document.getElementById("searchInput").addEventListener("keyup", searchTable);
