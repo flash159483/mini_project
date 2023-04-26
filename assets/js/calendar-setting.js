@@ -1,13 +1,13 @@
 jQuery(document).ready(function () {
 	jQuery("#add-event").submit(function () {
-		alert("Submitted");
+		// alert("Submit Start");
 		var values = {};
 		$.each($('#add-event').serializeArray(), function (i, field) {
 			values[field.name] = field.value;
 		});
-		console.log(
-			values
-		);
+		values['color'] = getRandomColor();
+		// DB로 저장
+		alert("Submitted");
 	});
 });
 
@@ -32,13 +32,16 @@ jQuery(document).ready(function () {
 				center: 'month,agendaWeek,agendaDay',
 				right: 'today prev,next'
 			},
+			// 현재는 더미데이터, 추후 DB에서 읽어오면 될 듯
 			events: [
 				{
 					title: '[자유 멘토링] ★(팀원 구성 후) 프로젝트 주제 검토 및 선정/평가 방법',
 					name: '한철규',
 					description: '온라인',
 					start: '2023-04-25 10:00',
+					// date+start_hour (values.date + ' ' + values.start-hour)
 					end: '2023-04-25 14:00',
+					// date+end_hour (values.date + ' ' + values.start-hour)
 					className: 'fc-bg-default',
 					icon: "circle",
 					color: getRandomColor(),
