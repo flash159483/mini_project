@@ -121,7 +121,6 @@ function drawTable(data) {
 		no.innerHTML = i;
 		name.innerHTML = data[i]['name'];
 		cnt.innerHTML = data[i]['reviewCount'];
-		row.setAttribute("data-name", data[i]['name']);
 		row.addEventListener("click", function () {
 			var clickedName = this.cells[1].innerHTML;
 			alert(clickedName);
