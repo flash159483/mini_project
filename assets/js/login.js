@@ -65,24 +65,38 @@ if (document.getElementById('logOutBtn')) {
 }
 
 onAuthStateChanged(auth, (user) => {
+    
+    const btns = document.getElementsByClassName('login-btn');        
+    let link;
     if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
+
         // alert(uid);
         // document.getElementsByClassName("btn btn-primary")[0].innerHTML="Log Out";
-        if (document.getElementById("signUpBtn"))
+        if (document.getElementById("signUpBtn")) {
             document.getElementById("signUpBtn").innerHTML = "Log Out";
+            link = 'time.html';
+        }
+        
         // ...
     } else {
         // User is signed out
         // ...
+        link = 'login.html';
         if (document.getElementById('logOutBtn')) {
-            const link = "index.html";
             alert("이용하시려면 로그인하셔야됩니다");
-            location.replace(link);
-
+            location.replace('index.html');
         }
+    }
+    console.log(link);
+    for(let i = 0 ; i < btns.length ; i++) {
+        console.log(btns[i]);
+        
+        btns[i].addEventListener('click', function () {
+            location.replace(link);
+        })
     }
 });
 
@@ -100,4 +114,3 @@ if (document.getElementById('signUpBtn')) {
     });
 }
 
-export { firebaseConfig };
