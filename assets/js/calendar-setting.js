@@ -1,3 +1,39 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRedirectResult, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.20.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAiVOFKSUCQUBCe2ynqrcDdiP5rz2ULEjc",
+    authDomain: "chatapp-d20dc.firebaseapp.com",
+    projectId: "chatapp-d20dc",
+    storageBucket: "chatapp-d20dc.appspot.com",
+    messagingSenderId: "406808996835",
+    appId: "1:406808996835:web:7968975ad6aa1764e68ed6",
+    measurementId: "G-E56TL9L001"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const provider = new GoogleAuthProvider(app);
+const auth = getAuth(app);
+let uid;
+
+onAuthStateChanged(auth, (user) => {
+	if (user) {
+			// User is signed in, see docs for a list of available properties
+			// https://firebase.google.com/docs/reference/js/firebase.User
+			uid = user.uid;
+			
+			// alert(uid);
+			// document.getElementsByClassName("btn btn-primary")[0].innerHTML="Log Out";
+			
+			// ...
+	} else {
+			// User is signed out
+			// ...
+			
+	}
+});
+
 jQuery(document).ready(function () {
 	jQuery("#add-event").submit(function () {
 		// alert("Submit Start");
@@ -6,6 +42,8 @@ jQuery(document).ready(function () {
 			values[field.name] = field.value;
 		});
 		values['color'] = getRandomColor();
+		values['uid'] = uid;
+		// console.log()
 		// DB로 저장
 		alert("Submitted");
 	});
