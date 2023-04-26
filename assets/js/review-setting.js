@@ -42,9 +42,9 @@ jQuery(document).ready(function () {
 
 		const today = new Date();
 		const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		const str = month[today.getMonth()] + ' ' + today.getDate() + ', ' + today.getFullYear();
+		const str = `${month[today.getMonth()]} ${today.getDate()} ${today.getFullYear()}`;
 		values['time'] = str;
-		
+		// console.log(values);
 		// DB로 저장
 		alert("Submitted");
 	});

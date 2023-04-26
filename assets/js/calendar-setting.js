@@ -49,6 +49,7 @@ jQuery(document).ready(function () {
 		// DB로 저장
 		alert("Submitted");
 	});
+	// DB에서 Review 읽어와야 함
 	drawTable(tmp);
 
 });
@@ -111,8 +112,8 @@ function getRandomColor() {
 
 function drawTable(data) {
 	var table = document.getElementById("datatable");
-
-	for (var i = 1; i < data.length; i++) {
+	
+	for (var i = 0; i < data.length; i++) {
 		var row = table.insertRow();
 		var no = row.insertCell(0);
 		var name = row.insertCell(1);
@@ -125,6 +126,7 @@ function drawTable(data) {
 		row.addEventListener("click", function () {
 			var clickedName = this.cells[1].innerHTML;
 			alert(clickedName);
+			// 클릭한 이름에 맞는 review.html로 이동
 		})
 	}
 
@@ -134,11 +136,11 @@ function searchTable() {
 	var input = document.getElementById("searchInput").value;
 	var table = document.getElementById("datatable");
 
-
-	for (var i = 0; i < table.rows.length; i++) {
+	for (var i = 1; i < table.rows.length; i++) {
 		var row = table.rows[i];
 
 		var name = row.cells[1].innerHTML.toLowerCase();
+		
 		if (name.includes(input)) {
 			row.style.display = "";
 		} else {
