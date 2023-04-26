@@ -99,3 +99,5 @@ if (document.getElementById('signUpBtn')) {
         }
     });
 }
+
+export { firebaseConfig };
