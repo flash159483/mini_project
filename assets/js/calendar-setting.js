@@ -138,8 +138,7 @@ function searchTable() {
 	for (var i = 0; i < table.rows.length; i++) {
 		var row = table.rows[i];
 
-		// null error?
-		var name = row.getAttribute("data-name").toLowerCase();
+		var name = row.cells[1].innerHTML.toLowerCase();
 		if (name.includes(input)) {
 			row.style.display = "";
 		} else {
