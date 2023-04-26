@@ -48,5 +48,25 @@ jQuery(document).ready(function () {
 		// DB로 저장
 		alert("Submitted");
 	});
+	if(localStorage.getItem('name')){
+		const name = localStorage.getItem('name');
+		console.log(name);
+		searchTable(name);
+	}
 });
 
+
+function searchTable(name) {
+	document.getElementById('name').innerHTML = name;
+	var table = document.getElementsByClassName("card");
+	
+	for (var i = 0; i < table.length; i++) {
+		const tmp = table[i].getElementsByClassName('card-title')[0].innerHTML;
+
+		if (name.includes(tmp)) {
+			table[i].style.display ="";
+		} else {
+			table[i].style.display = "none";
+		}
+	}
+}
