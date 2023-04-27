@@ -39,12 +39,13 @@ jQuery(document).ready(function () {
 			formData.append(field.name, field.value);
 			console.log(field.name);
 		});
-
+		const search = new URLSearchParams(window.location.search);
+		const clickedName = search.get("title");
 		const today = new Date();
 		const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		const str = `${month[today.getMonth()]} ${today.getDate()} ${today.getFullYear()}`;
 		formData.append("time", str);
-		formData.append("name", localStorage.getItem('name'));
+		formData.append("name", clickedName);
 		// DB로 저장
 		fetch('http://13.209.83.66/api/comment', {
 			method: 'POST',
@@ -54,9 +55,8 @@ jQuery(document).ready(function () {
 		alert("Submitted");
 	});
 	if (localStorage.getItem('name')) {
-		const name = localStorage.getItem('name');
-		console.log(name);
-		fetch("http://13.209.83.66/api/comment-by-name?name=" + name)
+		console.log(clickedName)
+		fetch("http://13.209.83.66/api/comment-by-name?name=" + clickedName)
 			.then(response => response.json())
 			.then(value => {
 				const container = document.getElementById("card-container");
