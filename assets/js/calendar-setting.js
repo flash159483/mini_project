@@ -93,15 +93,34 @@ jQuery(document).ready(function () {
 
 	});
 	fetch("http://13.209.83.66/api/comment")
-	.then(response => response.json())
-	.then(data => {
-		console.log(data);
-		console.log("enter");
-		drawTable(data); 
-	})
-	.catch(error => {
-		console.log(error);
-	})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			console.log("enter");
+			drawTable(data);
+		})
+		.catch(error => {
+			var data = [{
+				title: '[자유 멘토링] ★(팀원 구성 후) 프로젝트 주제 검토 및 선정/평가 방법',
+				name: '한철규',
+				description: '온라인',
+				start: "2023-04-27 13:00:00",
+				end: "2023-04-27 17:00:00",
+				className: 'fc-bg-default',
+				icon: "circle",
+				color: getRandomColor(),
+			}, {
+				title: '[자유 멘토링] ★(팀원 구성 후) 프로젝트 주제 검토 및 선정/평가 방법',
+				name: '한철규',
+				description: '온라인',
+				start: "2023-04-26 10:00:00",
+				end: "2023-04-26 13:00:00",
+				className: 'fc-bg-default',
+				icon: "circle",
+				color: getRandomColor(),
+			},];
+			drawTable(data);
+		})
 });
 
 
