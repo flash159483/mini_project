@@ -182,74 +182,46 @@ function drawTable(data) {
 
 }
 
-function searchTable() {
-	var input = document.getElementById("searchInput").value;
-	var table = document.getElementById("datatable");
-	console.log("enter");
-	for (var i = 1; i < table.rows.length; i++) {
-		var row = table.rows[i];
-
-		var name = row.cells[1].innerHTML;
-
-		if (name.includes(input)) {
-			row.style.display = "";
-		} else {
-			row.style.display = "none";
-		}
-	}
-}
 
 // 리뷰가 없는 멘토님을 사용자가 원하는걸 추가하는게 나을지, 아니면 사용자가 켈린더에 추가할때 멘토님이 리뷰없으면 추가할지 
 // 고민이 되는군요. 
 function addMentor(input) {
 	var table = document.getElementById("datatable");
-	var flag = false;
-	for (var i = 1; i < table.rows.length; i++) {
-		var row = table.rows[i];
-		console.log(table);;
-		var name = row.cells[i].innerHTML;
 
-		if (name === input) {
-			flag = true;
-		}
-	}
-	// 검색했을때 멘토님의 리뷰가 작성한적이 없으면 추가한다
-	if (!flag) {
-		console.log("enter");
-		var row = table.insertRow(1);
-		var no = row.insertCell(0);
-		var name = row.insertCell(1);
-		var cnt = row.insertCell(2);
+	var row = table.insertRow(1);
+	var no = row.insertCell(0);
+	var name = row.insertCell(1);
+	var cnt = row.insertCell(2);
 
-		no.innerHTML = " ";
-		name.innerHTML = input;
-		cnt.innerHTML = 0;
-		row.addEventListener("click", function () {
-			var clickedName = this.cells[1].innerHTML;
-			// 클릭한 이름에 맞는 review.html로 이동
-			localStorage.setItem('name', clickedName);
-			const link = "review.html";
-			location.replace(link);
-		})
+	no.innerHTML = " ";
+	name.innerHTML = input;
+	cnt.innerHTML = 0;
+	row.addEventListener("click", function () {
+		var clickedName = this.cells[1].innerHTML;
+		// 클릭한 이름에 맞는 review.html로 이동
+		localStorage.setItem('name', clickedName);
+		const link = "review.html";
+		location.replace(link);
+	})
 
-		var formData = new FormData();
-		formData.append("name", input);
-		formData.append("comment", "");
-		const today = new Date();
-		const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		const str = `${month[today.getMonth()]} ${today.getDate()} ${today.getFullYear()}`;
-		formData.append("time", str);
-		console.log(formData);
-		// DB로 저장
-		fetch('http://13.209.83.66/api/comment', {
-			method: 'POST',
-			body: formData
-		})
-			.then(response => console.log(response))
-			.then(data => console.log(data))
-			.catch(error => alert(error));
-		alert("Submitted");
-	}
+	var formData = new FormData();
+	formData.append("name", input);
+	formData.append("comment", "");
+	const today = new Date();
+	const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	const str = `${month[today.getMonth()]} ${today.getDate()} ${today.getFullYear()}`;
+	formData.append("time", str);
+	console.log(formData);
+	// DB로 저장
+	fetch('http://13.209.83.66/api/comment', {
+		method: 'POST',
+		body: formData
+	})
+		.then(response => console.log(response))
+		.then(data => console.log(data))
+		.catch(error => alert(error));
+	alert("Submitted");
+
 }
 
 
