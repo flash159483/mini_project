@@ -55,6 +55,8 @@ jQuery(document).ready(function () {
 		alert("Submitted");
 	});
 	if (localStorage.getItem('name')) {
+		const search = new URLSearchParams(window.location.search);
+		const clickedName = search.get("title");
 		console.log(clickedName)
 		fetch("http://13.209.83.66/api/comment-by-name?name=" + clickedName)
 			.then(response => response.json())
