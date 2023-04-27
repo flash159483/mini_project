@@ -64,13 +64,13 @@ jQuery(document).ready(function () {
 		.then(value => {
 			const container = document.getElementById("card-container");
 
-			for (var i = 1; i <= value.length; i++) {
+			for (var i = 0; i < value.length; i++) {
 				const card = document.createElement("div");
 				card.classList.add("card", "col-md-12", "mb-3");
 
 				const cardBody = document.createElement("div");
 				card.classList.add("card-body", "shadow");
-
+				console.log(value[i]);
 				const cardTitle = document.createElement("h5");
 				cardTitle.classList.add("card-title");
 				cardTitle.textContent = value[i]["title"];
