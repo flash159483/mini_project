@@ -34,7 +34,7 @@ onAuthStateChanged(auth, (user) => {
 	}
 });
 
-const tmp = [{ name: "AB", reviewCount: "200" }, { name: "CD", reviewCount: "120" }, { name: "EG", reviewCount: "500" }];
+const tmp = [{ name: "이광헌", reviewCount: "10" }, { name: "김현", reviewCount: "6" }, { name: "유저스틴", reviewCount: "5" }, { name: "안재홍", reviewCount: "4" }, { name: "김동현", reviewCount: "1" }, { name: "최광선", reviewCount: "15" }];
 
 jQuery(document).ready(function () {
 	jQuery("#add-event").submit(function () {
@@ -89,6 +89,42 @@ jQuery(document).ready(function () {
 					icon: "circle",
 					color: getRandomColor(),
 				},
+				{
+					title: '[자유 멘토링] Customer Journey Map 으로 사용자 중심 서비스 기획하기 (훌륭한 개발자가 놓치고 있는 것들)',
+					name: '현창호',
+					description: '6회의실',
+					start: '2023-04-27 06:30',
+					// date+start_hour (values.date + ' ' + values.start-hour)
+					end: '2023-04-27 09:30',
+					// date+end_hour (values.date + ' ' + values.start-hour)
+					className: 'fc-bg-default',
+					icon: "circle",
+					color: getRandomColor(),
+				},
+				{
+					title: '[멘토 특강] jira & confluence 생성해서 프로젝트 협업하기 (실습포함)',
+					name: '이광헌',
+					description: '1회의실',
+					start: '2023.04.28 14:30',
+					// date+start_hour (values.date + ' ' + values.start-hour)
+					end: '2023.04.28 18:30',
+					// date+end_hour (values.date + ' ' + values.start-hour)
+					className: 'fc-bg-default',
+					icon: "circle",
+					color: getRandomColor(),
+				},
+				{
+					title: '[자유 멘토링] IoT 주제로 프로젝트 하실팀(분)! 최근 제조업, 물류업, 농업 등 IoT 비즈니스 관련 아이디어 발굴',
+					name: '김현',
+					description: '온라인',
+					start: '2023.04.26 09:30',
+					// date+start_hour (values.date + ' ' + values.start-hour)
+					end: '2023.04.26 12:30',
+					// date+end_hour (values.date + ' ' + values.start-hour)
+					className: 'fc-bg-default',
+					icon: "circle",
+					color: getRandomColor(),
+				},
 			],
 			locale: 'ko',
 			dayClick: function () {
@@ -119,7 +155,7 @@ function drawTable(data) {
 		var name = row.insertCell(1);
 		var cnt = row.insertCell(2);
 
-		no.innerHTML = i;
+		no.innerHTML = i + 1;
 		name.innerHTML = data[i]['name'];
 		cnt.innerHTML = data[i]['reviewCount'];
 		row.addEventListener("click", function () {
@@ -141,7 +177,7 @@ function searchTable() {
 		var row = table.rows[i];
 
 		var name = row.cells[1].innerHTML.toLowerCase();
-		
+
 		if (name.includes(input)) {
 			row.style.display = "";
 		} else {
