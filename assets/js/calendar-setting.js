@@ -175,8 +175,7 @@ function drawTable(data) {
 			var clickedName = this.cells[1].innerHTML;
 			// 클릭한 이름에 맞는 review.html로 이동
 			const title = encodeURIComponent(clickedName);
-
-			window.location.href = "review.html?title=${clickedName}"
+			window.location.href = "review.html?title=" + clickedName;
 		})
 	}
 
@@ -201,7 +200,7 @@ function addMentor(input) {
 		// 클릭한 이름에 맞는 review.html로 이동
 		const title = encodeURIComponent(clickedName);
 
-		window.location.href = "review.html?title=${clickedName}"
+		window.location.href = "review.html?title=" + clickedName;
 	})
 
 	var formData = new FormData();

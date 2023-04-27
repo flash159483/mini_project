@@ -56,6 +56,8 @@ jQuery(document).ready(function () {
 	});
 	const search = new URLSearchParams(window.location.search);
 	const clickedName = search.get("title");
+	console.log(clickedName);
+	document.getElementById("name").innerHTML = clickedName + " 멘토님";
 	console.log(clickedName)
 	fetch("http://13.209.83.66/api/comment-by-name?name=" + clickedName)
 		.then(response => response.json())
