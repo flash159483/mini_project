@@ -70,7 +70,7 @@ jQuery(document).ready(function () {
 
 					const cardTitle = document.createElement("h5");
 					cardTitle.classList.add("card-title");
-					cardTitle.textContent = value[i]["className"];
+					cardTitle.textContent = value[i]["title"];
 
 					const cardText = document.createElement("p");
 					cardText.classList.add("card-text");
