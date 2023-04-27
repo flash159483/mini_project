@@ -45,14 +45,34 @@ jQuery(document).ready(function () {
 		});
 		values['color'] = getRandomColor();
 		values['uid'] = uid;
-		// console.log()
+		values['start'] = toISO(values['date'] + ' ' + values['start-hour']);
+		values['end'] = toISO(values['date'] + ' ' + values['end-hour']);
+		delete values['date'];
+		delete values['start-hour'];
+		delete values['end-hour'];
+		fetch('13.209.83.66/api/timetable', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(values)
+		})
+			.then(response => response.json())
+			.then(data => console.log(data))
+			.catch(error => alert(error));
+
 		// DB로 저장
 		addMentor("김상순");
 		// addMentor(values["name"]);
 	});
 	// DB에서 Review 읽어와야 함
-	drawTable(tmp);
-
+	fetch('http://13.209.83.66/api/comment')
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			drawTable(data);
+		})
+		.catch(error => console.log(error));
 });
 
 
@@ -63,49 +83,71 @@ jQuery(document).ready(function () {
 	// ------------------------------------------------------ //
 	jQuery(function () {
 		// page is ready
-		jQuery('#calendar').fullCalendar({
-			themeSystem: 'bootstrap4',
-			// emphasizes business hours
-			businessHours: false,
-			defaultView: 'agendaWeek',
-			// event dragging & resizing
-			editable: true,
-			// header
-			header: {
-				left: 'title',
-				center: 'month,agendaWeek,agendaDay',
-				right: 'today prev,next'
-			},
-			// 현재는 더미데이터, 추후 DB에서 읽어오면 될 듯
-			events: [
-				{
+		fetch('http://13.209.83.66/api/timetable?uid=1234')
+			.then(response => response.json())
+			.then(data => {
+				drawcal(data);
+			})
+			.catch(error => {
+				var data = [{
 					title: '[자유 멘토링] ★(팀원 구성 후) 프로젝트 주제 검토 및 선정/평가 방법',
 					name: '한철규',
 					description: '온라인',
-					start: '2023-04-25 10:00',
+					start: "2023-04-27T05:00:00.000Z",
+					end: "2023-04-27T07:00:00.000Z",
+					className: 'fc-bg-default',
+					icon: "circle",
+					color: getRandomColor(),
+				}, {
+					title: '[자유 멘토링] ★(팀원 구성 후) 프로젝트 주제 검토 및 선정/평가 방법',
+					name: '한철규',
+					description: '온라인',
+					start: "2023-04-26T12:00:00.000Z",
 					// date+start_hour (values.date + ' ' + values.start-hour)
-					end: '2023-04-25 14:00',
+					end: "2023-04-26T14:00:00.000Z",
 					// date+end_hour (values.date + ' ' + values.start-hour)
 					className: 'fc-bg-default',
 					icon: "circle",
 					color: getRandomColor(),
-				},
-			],
-			locale: 'ko',
-			dayClick: function () {
-				jQuery('#modal-view-event-add').modal();
-			},
-			eventClick: function (event, jsEvent, view) {
-				jQuery('.event-icon').html("<i class='fa fa-" + event.icon + "'></i>");
-				jQuery('.event-title').html(event.title);
-				jQuery('.event-body').html(`멘토 : ${event.name} <br>강의실 : ${event.description}<br> ${event.start._i.substr(10)} ~ ${event.end._i.substr(10)} `);
-				jQuery('.eventUrl').attr('href', event.url);
-				jQuery('#modal-view-event').modal();
-			}
-		})
+				},];
+				drawcal(data);
+			});
+
 	});
 
 })(jQuery);
+
+function drawcal(data) {
+	data["start"] = convertDate(data["start"]);
+	data["end"] = convertDate(data["end"]);
+	jQuery('#calendar').fullCalendar({
+		themeSystem: 'bootstrap4',
+		// emphasizes business hours
+		businessHours: false,
+		defaultView: 'agendaWeek',
+		// event dragging & resizing
+		editable: true,
+		// header
+		header: {
+			left: 'title',
+			center: 'month,agendaWeek,agendaDay',
+			right: 'today prev,next'
+		},
+		// 현재는 더미데이터, 추후 DB에서 읽어오면 될 듯
+		events: data,
+		locale: 'ko',
+		dayClick: function () {
+			jQuery('#modal-view-event-add').modal();
+		},
+		eventClick: function (event, jsEvent, view) {
+			jQuery('.event-icon').html("<i class='fa fa-" + event.icon + "'></i>");
+			jQuery('.event-title').html(event.title);
+			jQuery('.event-body').html(`멘토 : ${event.name} <br>강의실 : ${event.description}<br> ${event.start._i} ~ ${event.end._i} `);
+			jQuery('.eventUrl').attr('href', event.url);
+			jQuery('#modal-view-event').modal();
+		}
+	})
+}
 
 function getRandomColor() {
 	return "#" + Math.floor(Math.random() * 16777215).toString(16);
@@ -182,6 +224,26 @@ function addMentor(input) {
 			location.replace(link);
 		})
 	}
+}
+
+function convertDate(time) {
+	const jsDate = new Date(time);
+	const formattedDate = jsDate.toLocaleString("ko-KR", {
+		timeZone: "Asia/Seoul",
+		hour12: false,
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+		hour: "2-digit",
+		minute: "2-digit",
+		second: "2-digit",
+	});
+	return formattedDate;
+}
+
+function toISO(time) {
+	const tmp = new Date(time);
+	return tmp.toISOString();
 }
 
 
