@@ -32,15 +32,16 @@ onAuthStateChanged(auth, (user) => {
 });
 
 jQuery(document).ready(function () {
-	jQuery("#add-event").submit(function () {
+	var search = new URLSearchParams(window.location.search);
+	var clickedName = search.get("mentor");
+	jQuery("#add-event").submit(function (event) {
 		// alert("Submit Start");
 		var formData = new FormData();
 		$.each($('#add-event').serializeArray(), function (i, field) {
 			formData.append(field.name, field.value);
 			console.log(field.name);
 		});
-		const search = new URLSearchParams(window.location.search);
-		const clickedName = search.get("title");
+
 		const today = new Date();
 		const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 		const str = `${month[today.getMonth()]} ${today.getDate()} ${today.getFullYear()}`;
@@ -53,9 +54,9 @@ jQuery(document).ready(function () {
 		})
 			.catch(error => alert(error));
 		alert("Submitted");
+		event.preventDefault();
+		location.reload();
 	});
-	const search = new URLSearchParams(window.location.search);
-	const clickedName = search.get("title");
 	console.log(clickedName);
 	document.getElementById("name").innerHTML = clickedName + " 멘토님";
 	console.log(clickedName)
