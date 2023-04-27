@@ -56,7 +56,6 @@ jQuery(document).ready(function () {
 	if (localStorage.getItem('name')) {
 		const name = localStorage.getItem('name');
 		console.log(name);
-		searchTable(name);
 		fetch("http://13.209.83.66/api/comment-by-name?name=" + name)
 			.then(response => response.json())
 			.then(value => {
@@ -91,18 +90,3 @@ jQuery(document).ready(function () {
 	}
 });
 
-
-function searchTable(name) {
-	document.getElementById('name').innerHTML = name;
-	var table = document.getElementsByClassName("card");
-
-	for (var i = 0; i < table.length; i++) {
-		const tmp = table[i].getElementsByClassName('card-title')[0].innerHTML;
-
-		if (name.includes(tmp)) {
-			table[i].style.display = "";
-		} else {
-			table[i].style.display = "none";
-		}
-	}
-}

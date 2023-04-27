@@ -224,6 +224,3 @@ function addMentor(input) {
 
 }
 
-
-
-document.getElementById("searchInput").addEventListener("keyup", searchTable);
