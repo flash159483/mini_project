@@ -47,7 +47,8 @@ jQuery(document).ready(function () {
 		values['uid'] = uid;
 		// console.log()
 		// DB로 저장
-		alert("Submitted");
+		addMentor("김상순");
+		// addMentor(values["name"]);
 	});
 	// DB에서 Review 읽어와야 함
 	drawTable(tmp);
@@ -115,11 +116,10 @@ function drawTable(data) {
 
 	for (var i = 0; i < data.length; i++) {
 		var row = table.insertRow();
-		var no = row.insertCell(0);
+		row.insertCell(0).innerHTML = " ";
 		var name = row.insertCell(1);
 		var cnt = row.insertCell(2);
 
-		no.innerHTML = i;
 		name.innerHTML = data[i]['name'];
 		cnt.innerHTML = data[i]['reviewCount'];
 		row.addEventListener("click", function () {
@@ -136,17 +136,51 @@ function drawTable(data) {
 function searchTable() {
 	var input = document.getElementById("searchInput").value;
 	var table = document.getElementById("datatable");
-
+	console.log("enter");
 	for (var i = 1; i < table.rows.length; i++) {
 		var row = table.rows[i];
 
-		var name = row.cells[1].innerHTML.toLowerCase();
-		
+		var name = row.cells[1].innerHTML;
+
 		if (name.includes(input)) {
 			row.style.display = "";
 		} else {
 			row.style.display = "none";
 		}
+	}
+}
+
+// 리뷰가 없는 멘토님을 사용자가 원하는걸 추가하는게 나을지, 아니면 사용자가 켈린더에 추가할때 멘토님이 리뷰없으면 추가할지 
+// 고민이 되는군요. 
+function addMentor(input) {
+	var table = document.getElementById("datatable");
+	var flag = false;
+	for (var i = 1; i < table.rows.length; i++) {
+		var row = table.rows[i];
+		console.log(table);;
+		var name = row.cells[i].innerHTML;
+
+		if (name === input) {
+			flag = true;
+		}
+	}
+	// 검색했을때 멘토님의 리뷰가 작성한적이 없으면 추가한다
+	if (!flag) {
+		var row = table.insertRow(1);
+		var no = row.insertCell(0);
+		var name = row.insertCell(1);
+		var cnt = row.insertCell(2);
+
+		no.innerHTML = " ";
+		name.innerHTML = input;
+		cnt.innerHTML = 0;
+		row.addEventListener("click", function () {
+			var clickedName = this.cells[1].innerHTML;
+			// 클릭한 이름에 맞는 review.html로 이동
+			localStorage.setItem('name', clickedName);
+			const link = "review.html";
+			location.replace(link);
+		})
 	}
 }
 
