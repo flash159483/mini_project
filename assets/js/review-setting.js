@@ -54,41 +54,40 @@ jQuery(document).ready(function () {
 			.catch(error => alert(error));
 		alert("Submitted");
 	});
-	if (localStorage.getItem('name')) {
-		const search = new URLSearchParams(window.location.search);
-		const clickedName = search.get("title");
-		console.log(clickedName)
-		fetch("http://13.209.83.66/api/comment-by-name?name=" + clickedName)
-			.then(response => response.json())
-			.then(value => {
-				const container = document.getElementById("card-container");
+	const search = new URLSearchParams(window.location.search);
+	const clickedName = search.get("title");
+	console.log(clickedName)
+	fetch("http://13.209.83.66/api/comment-by-name?name=" + clickedName)
+		.then(response => response.json())
+		.then(value => {
+			const container = document.getElementById("card-container");
 
-				for (var i = 1; i <= value.length; i++) {
-					const card = document.createElement("div");
-					card.classList.add("card", "col-md-12", "mb-3");
+			for (var i = 1; i <= value.length; i++) {
+				const card = document.createElement("div");
+				card.classList.add("card", "col-md-12", "mb-3");
 
-					const cardBody = document.createElement("div");
-					card.classList.add("card-body", "shadow");
+				const cardBody = document.createElement("div");
+				card.classList.add("card-body", "shadow");
 
-					const cardTitle = document.createElement("h5");
-					cardTitle.classList.add("card-title");
-					cardTitle.textContent = value[i]["title"];
+				const cardTitle = document.createElement("h5");
+				cardTitle.classList.add("card-title");
+				cardTitle.textContent = value[i]["title"];
 
-					const cardText = document.createElement("p");
-					cardText.classList.add("card-text");
-					cardText.textContent = value[i]["comment"];
+				const cardText = document.createElement("p");
+				cardText.classList.add("card-text");
+				cardText.textContent = value[i]["comment"];
 
-					const cardFooter = document.createElement("div");
-					cardFooter.classList.add("card-footer");
-					cardFooter.textContent = value[i]["time"];
+				const cardFooter = document.createElement("div");
+				cardFooter.classList.add("card-footer");
+				cardFooter.textContent = value[i]["time"];
 
-					cardBody.appendChild(cardTitle);
-					cardBody.appendChild(cardText);
-					cardBody.appendChild(cardFooter);
-					card.appendChild(cardBody);
-					container.appendChild(card);
-				}
-			})
-	}
+				cardBody.appendChild(cardTitle);
+				cardBody.appendChild(cardText);
+				cardBody.appendChild(cardFooter);
+				card.appendChild(cardBody);
+				container.appendChild(card);
+			}
+		})
+
 });
 
