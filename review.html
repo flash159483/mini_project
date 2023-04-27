@@ -33,39 +33,9 @@
         </div>
     </nav>
     <div class="container mt-5">
-        <h1 id="name">xxx</h1> <!-- 멘토님 성함-->
+        <h1 id="name">이광헌 멘토님</h1> <!-- 멘토님 성함-->
         <hr>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card mb-3">
-                    <div class="card-body shadow">
-                        <h5 class="card-title">CD</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis urna eget
-                            ex
-                            euismod molestie. Proin vehicula mi eu velit sagittis, sed porttitor quam accumsan. Sed
-                            gravida nulla
-                            nibh, in maximus metus suscipit vitae. Aliquam erat volutpat.</p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Posted on January 1, 2022</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="card mb-3">
-                    <div class="card-body shadow">
-                        <h5 class="card-title">AB</h5>
-                        <p class="card-text">Pellentesque quis nisl enim. Donec faucibus elit at elit gravida, quis
-                            rhoncus
-                            ipsum venenatis. Nunc sit amet augue ut eros bibendum commodo eu vel augue. Nunc ut metus
-                            sed urna
-                            pharetra laoreet. </p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Posted on February 1, 2022</small>
-                    </div>
-                </div>
-            </div>
+        <div class="row" id="card-container">
         </div>
     </div>
     <div class="container mt-5">
@@ -74,11 +44,11 @@
         <form id="add-event">
             <div class="form-group">
                 <label for="className">Class Name</label>
-                <input type="text" class="form-control" name="className" placeholder="Enter class name">
+                <input type="text" class="form-control" name="title" placeholder="Enter class name">
             </div>
             <div class="form-group">
                 <label for="review">Review</label>
-                <textarea class="form-control" name="review" rows="3" placeholder="Write your review"></textarea>
+                <textarea class="form-control" name="comment" rows="3" placeholder="Write your review"></textarea>
             </div>
             <button type="submit" class="btn btn-primary mb-4">Submit</button>
         </form>

@@ -23,10 +23,33 @@ onAuthStateChanged(auth, (user) => {
 		// https://firebase.google.com/docs/reference/js/firebase.User
 		uid = user.uid;
 
-		// alert(uid);
-		// document.getElementsByClassName("btn btn-primary")[0].innerHTML="Log Out";
-
-		// ...
+		fetch('http://13.209.83.66/api/timetable?uid=' + uid)
+			.then(response => response.json())
+			.then(data => {
+				drawcal(data);
+			})
+			.catch(error => {
+				var data = [{
+					title: '[자유 멘토링] ★(팀원 구성 후) 프로젝트 주제 검토 및 선정/평가 방법',
+					name: '한철규',
+					description: '온라인',
+					start: "2023-04-27 13:00:00",
+					end: "2023-04-27 17:00:00",
+					className: 'fc-bg-default',
+					icon: "circle",
+					color: getRandomColor(),
+				}, {
+					title: '[자유 멘토링] ★(팀원 구성 후) 프로젝트 주제 검토 및 선정/평가 방법',
+					name: '한철규',
+					description: '온라인',
+					start: "2023-04-26 10:00:00",
+					end: "2023-04-26 13:00:00",
+					className: 'fc-bg-default',
+					icon: "circle",
+					color: getRandomColor(),
+				},];
+				drawcal(data);
+			});
 	} else {
 		// User is signed out
 		// ...
@@ -34,113 +57,85 @@ onAuthStateChanged(auth, (user) => {
 	}
 });
 
-const tmp = [{ name: "이광헌", reviewCount: "10" }, { name: "김현", reviewCount: "6" }, { name: "유저스틴", reviewCount: "5" }, { name: "안재홍", reviewCount: "4" }, { name: "김동현", reviewCount: "1" }, { name: "최광선", reviewCount: "15" }];
+const tmp = [{ name: "AB", reviewCount: "200" }, { name: "CD", reviewCount: "120" }, { name: "EG", reviewCount: "500" }];
+
 
 jQuery(document).ready(function () {
-	jQuery("#add-event").submit(function () {
-		// alert("Submit Start");
-		var values = {};
-		$.each($('#add-event').serializeArray(), function (i, field) {
-			values[field.name] = field.value;
-		});
-		values['color'] = getRandomColor();
-		values['uid'] = uid;
-		// console.log()
-		// DB로 저장
-		alert("Submitted");
-	});
-	// DB에서 Review 읽어와야 함
-	drawTable(tmp);
+	jQuery("#add-event").submit(function (event) {
+		// event.preventDefault();
 
+		var formData = new FormData(this); // Create a new FormData object with the form fields
+
+		$.each($('#add-event').serializeArray(), function (i, field) {
+			console.log(field.name, typeof field.value);
+			formData.append(field.name, field.value);
+		});
+
+		formData.append('color', getRandomColor()); // Add additional properties to the FormData object
+		formData.append('uid', uid);
+		formData.append('start', formData.get('date') + ' ' + formData.get('start-hour'));
+		formData.append('end', formData.get('date') + ' ' + formData.get('end-hour'));
+		formData.delete('date');
+		formData.delete('start-hour');
+		formData.delete('end-hour');
+
+		if (formData.get("start") < formData.get("end")) {
+			addMentor(formData.get("name"));
+			fetch('http://13.209.83.66/api/timetable', {
+				method: 'POST',
+				body: formData // Send the FormData object as the request body
+			})
+				.catch(error => alert(error));
+		}
+		else {
+			alert("시작 시간이 더 앞으로 설정해주세요");
+		}
+
+	});
+	fetch("http://13.209.83.66/api/comment")
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		console.log("enter");
+		drawTable(data); 
+	})
+	.catch(error => {
+		console.log(error);
+	})
 });
 
 
-(function () {
-	'use strict';
-	// ------------------------------------------------------- //
-	// Calendar
-	// ------------------------------------------------------ //
-	jQuery(function () {
-		// page is ready
-		jQuery('#calendar').fullCalendar({
-			themeSystem: 'bootstrap4',
-			// emphasizes business hours
-			businessHours: false,
-			defaultView: 'agendaWeek',
-			// event dragging & resizing
-			editable: true,
-			// header
-			header: {
-				left: 'title',
-				center: 'month,agendaWeek,agendaDay',
-				right: 'today prev,next'
-			},
-			// 현재는 더미데이터, 추후 DB에서 읽어오면 될 듯
-			events: [
-				{
-					title: '[자유 멘토링] ★(팀원 구성 후) 프로젝트 주제 검토 및 선정/평가 방법',
-					name: '한철규',
-					description: '온라인',
-					start: '2023-04-25 10:00',
-					// date+start_hour (values.date + ' ' + values.start-hour)
-					end: '2023-04-25 14:00',
-					// date+end_hour (values.date + ' ' + values.start-hour)
-					className: 'fc-bg-default',
-					icon: "circle",
-					color: getRandomColor(),
-				},
-				{
-					title: '[자유 멘토링] Customer Journey Map 으로 사용자 중심 서비스 기획하기 (훌륭한 개발자가 놓치고 있는 것들)',
-					name: '현창호',
-					description: '6회의실',
-					start: '2023-04-27 06:30',
-					// date+start_hour (values.date + ' ' + values.start-hour)
-					end: '2023-04-27 09:30',
-					// date+end_hour (values.date + ' ' + values.start-hour)
-					className: 'fc-bg-default',
-					icon: "circle",
-					color: getRandomColor(),
-				},
-				{
-					title: '[멘토 특강] jira & confluence 생성해서 프로젝트 협업하기 (실습포함)',
-					name: '이광헌',
-					description: '1회의실',
-					start: '2023.04.28 14:30',
-					// date+start_hour (values.date + ' ' + values.start-hour)
-					end: '2023.04.28 18:30',
-					// date+end_hour (values.date + ' ' + values.start-hour)
-					className: 'fc-bg-default',
-					icon: "circle",
-					color: getRandomColor(),
-				},
-				{
-					title: '[자유 멘토링] IoT 주제로 프로젝트 하실팀(분)! 최근 제조업, 물류업, 농업 등 IoT 비즈니스 관련 아이디어 발굴',
-					name: '김현',
-					description: '온라인',
-					start: '2023.04.26 09:30',
-					// date+start_hour (values.date + ' ' + values.start-hour)
-					end: '2023.04.26 12:30',
-					// date+end_hour (values.date + ' ' + values.start-hour)
-					className: 'fc-bg-default',
-					icon: "circle",
-					color: getRandomColor(),
-				},
-			],
-			locale: 'ko',
-			dayClick: function () {
-				jQuery('#modal-view-event-add').modal();
-			},
-			eventClick: function (event, jsEvent, view) {
-				jQuery('.event-icon').html("<i class='fa fa-" + event.icon + "'></i>");
-				jQuery('.event-title').html(event.title);
-				jQuery('.event-body').html(`멘토 : ${event.name} <br>강의실 : ${event.description}<br> ${event.start._i.substr(10)} ~ ${event.end._i.substr(10)} `);
-				jQuery('.eventUrl').attr('href', event.url);
-				jQuery('#modal-view-event').modal();
-			}
-		})
-	});
 
-})(jQuery);
+
+function drawcal(data) {
+	jQuery('#calendar').fullCalendar({
+		themeSystem: 'bootstrap4',
+		// emphasizes business hours
+		businessHours: false,
+		defaultView: 'agendaWeek',
+		// event dragging & resizing
+		editable: true,
+		// header
+		header: {
+			left: 'title',
+			center: 'month,agendaWeek,agendaDay',
+			right: 'today prev,next'
+		},
+		// 현재는 더미데이터, 추후 DB에서 읽어오면 될 듯
+		events: data,
+		locale: 'ko',
+		dayClick: function () {
+			jQuery('#modal-view-event-add').modal();
+		},
+		eventClick: function (event, jsEvent, view) {
+			jQuery('.event-icon').html("<i class='fa fa-" + event.icon + "'></i>");
+			jQuery('.event-title').html(event.title);
+			jQuery('.event-body').html(`멘토 : ${event.name} <br>강의실 : ${event.description}<br> ${event.start._i} ~ ${event.end._i} `);
+			jQuery('.eventUrl').attr('href', event.url);
+			jQuery('#modal-view-event').modal();
+		}
+	})
+}
 
 function getRandomColor() {
 	return "#" + Math.floor(Math.random() * 16777215).toString(16);
@@ -151,11 +146,10 @@ function drawTable(data) {
 
 	for (var i = 0; i < data.length; i++) {
 		var row = table.insertRow();
-		var no = row.insertCell(0);
+		row.insertCell(0).innerHTML = " ";
 		var name = row.insertCell(1);
 		var cnt = row.insertCell(2);
 
-		no.innerHTML = i + 1;
 		name.innerHTML = data[i]['name'];
 		cnt.innerHTML = data[i]['reviewCount'];
 		row.addEventListener("click", function () {
@@ -172,11 +166,11 @@ function drawTable(data) {
 function searchTable() {
 	var input = document.getElementById("searchInput").value;
 	var table = document.getElementById("datatable");
-
+	console.log("enter");
 	for (var i = 1; i < table.rows.length; i++) {
 		var row = table.rows[i];
 
-		var name = row.cells[1].innerHTML.toLowerCase();
+		var name = row.cells[1].innerHTML;
 
 		if (name.includes(input)) {
 			row.style.display = "";
@@ -185,6 +179,60 @@ function searchTable() {
 		}
 	}
 }
+
+// 리뷰가 없는 멘토님을 사용자가 원하는걸 추가하는게 나을지, 아니면 사용자가 켈린더에 추가할때 멘토님이 리뷰없으면 추가할지 
+// 고민이 되는군요. 
+function addMentor(input) {
+	var table = document.getElementById("datatable");
+	var flag = false;
+	for (var i = 1; i < table.rows.length; i++) {
+		var row = table.rows[i];
+		console.log(table);;
+		var name = row.cells[i].innerHTML;
+
+		if (name === input) {
+			flag = true;
+		}
+	}
+	// 검색했을때 멘토님의 리뷰가 작성한적이 없으면 추가한다
+	if (!flag) {
+		console.log("enter");
+		var row = table.insertRow(1);
+		var no = row.insertCell(0);
+		var name = row.insertCell(1);
+		var cnt = row.insertCell(2);
+
+		no.innerHTML = " ";
+		name.innerHTML = input;
+		cnt.innerHTML = 0;
+		row.addEventListener("click", function () {
+			var clickedName = this.cells[1].innerHTML;
+			// 클릭한 이름에 맞는 review.html로 이동
+			localStorage.setItem('name', clickedName);
+			const link = "review.html";
+			location.replace(link);
+		})
+
+		var formData = new FormData();
+		formData.append("name", input);
+		formData.append("comment", "");
+		const today = new Date();
+		const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+		const str = `${month[today.getMonth()]} ${today.getDate()} ${today.getFullYear()}`;
+		formData.append("time", str);
+		console.log(formData);
+		// DB로 저장
+		fetch('http://13.209.83.66/api/comment', {
+			method: 'POST',
+			body: formData
+		})
+			.then(response => console.log(response))
+			.then(data => console.log(data))
+			.catch(error => alert(error));
+		alert("Submitted");
+	}
+}
+
 
 
 document.getElementById("searchInput").addEventListener("keyup", searchTable);

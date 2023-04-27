@@ -111,23 +111,25 @@
 										<h4 class="text-blue h4 mb-3 pl-3">강의를 추가해주세요</h4>
 										<div class="form-group">
 											<label>강의 이름</label>
-											<input type="text" class="form-control" name="title">
+											<input type="text" class="form-control" name="title" placeholder="강의 이름">
 										</div>
 										<div class="form-group">
 											<label>강의 장소</label>
-											<input type='text' class="datetimepicker form-control" name="description">
+											<input type='text' class="datetimepicker form-control" name="description"
+												placeholder="강의 장소">
 										</div>
 										<div class="form-group">
 											<label>멘토 성함</label>
-											<textarea class="form-control" name="name"></textarea>
+											<textarea class="form-control" name="name"
+												placeholder="멘토님 성함 (오타 없이 넣으셔야 리뷰가 제대로 나옵니다)"></textarea>
 										</div>
 										<div class="form-group">
 											<label>날짜 및 시간</label>
 											<input type="date" id="start" name="date" value="2023-04-27"
 												min="2023-04-01" max="2023-12-31">
-												
-											<input type="time" id="appt" name="start-hour" value="12:00" step="300" required>
-											<input type="time" id="appt" name="end-hour" value="13:00" step="300" required>
+
+											<input type="time" id="appt" name="start-hour" value="12:00" required>
+											<input type="time" id="appt" name="end-hour" value="13:00" required>
 										</div>
 
 									</div>
@@ -167,6 +169,7 @@
 	<script src="assets/js/core.js"></script>
 	<script src="assets/js/layout-settings.js"></script>
 	<script src="vendors/fullcalendar/fullcalendar.min.js"></script>
+	<script src="assets/js/calendar-setting.js"></script>
 	<script type="module" src="assets/js/calendar-setting.js"></script>
 	<script type="module" src="assets/js/login.js">	</script>
 </body>
